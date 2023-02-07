@@ -115,6 +115,7 @@ def plot_rdm(
     format: str = ".png",
     colormap: str = "cividis",
     show_plot: bool = False,
+    file_name: str = 'rdm'
 ) -> None:
     """Compute and plot representational dissimilarity matrix based on some distance measure.
 
@@ -149,7 +150,7 @@ def plot_rdm(
     if not os.path.exists(out_path):
         print("\n...Output directory did not exists. Creating directories.\n")
         os.makedirs(out_path)
-    plt.savefig(os.path.join(out_path, "".join(("rdm", format))))
+    plt.savefig(os.path.join(out_path, "".join((file_name, format))))
     if show_plot:
         plt.show()
     plt.close()

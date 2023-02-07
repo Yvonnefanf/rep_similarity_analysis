@@ -3,8 +3,6 @@ import torchvision.models as models
 
 from typing import Any
 from .custom import Custom
-
-
 class Resnet50_ecoset(Custom):
     def __init__(self, device, parameters) -> None:
         super().__init__(device)

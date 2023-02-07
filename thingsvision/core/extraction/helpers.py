@@ -39,6 +39,7 @@ def create_custom_extractor(
         model = model.module  # remove DataParallel
         preprocess = None
     elif hasattr(custom_models, model_name):
+        print('2222',custom_models,model_name)
         custom_model = getattr(custom_models, model_name)
         custom_model = custom_model(device, model_parameters)
         model, preprocess = custom_model.create_model()
@@ -99,7 +100,7 @@ def create_custom_extractor(
             return self.model(batch, text=None)
 
         CustomExtractor.forward = forward
-
+    
     custom_extractor = CustomExtractor(
         model_name=model_name,
         pretrained=pretrained,
@@ -147,22 +148,22 @@ def create_model_extractor(
     """
     Extractor = PyTorchExtractor if backend == "pt" else TensorFlowExtractor
 
-    class ModelExtractor(Extractor):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
+    # class ModelExtractor(Extractor):
+    #     def __init__(self, *args, **kwargs):
+    #         super().__init__(*args, **kwargs)
 
-    if forward_fn:
-        ModelExtractor.forward = forward_fn
+    # if forward_fn:
+    #     ModelExtractor.forward = forward_fn
 
-    model_extractor = ModelExtractor(
-        model_name="custom",
-        model_path=None,
-        device=device,
-        model=model,
-        preprocess=preprocess,
-    )
+    # model_extractor = ModelExtractor(
+    #     model_name="custom",
+    #     model_path=None,
+    #     device=device,
+    #     model=model,
+    #     preprocess=preprocess,
+    # )
 
-    return model_extractor
+    # return model_extractor
 
 
 def get_extractor(
